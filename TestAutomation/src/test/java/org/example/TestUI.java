@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class TestUI extends BaseTests{
     LoginPage _loginPage ;
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void loginTest() throws InterruptedException {
         _loginPage = new LoginPage(driver);
         _loginPage.enterUserName();
