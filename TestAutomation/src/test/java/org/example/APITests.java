@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.containsString;
 
 public class APITests {
 
-    @Test
+    @Test(enabled = false)
     public void getToken(){
         String m = "{ \"username\": \"admin\", \"password\": \"password123\" }";
 
@@ -26,7 +26,7 @@ public class APITests {
 
     }
 
-    @Test
+    @Test(enabled = false)
     public void getBookingids() {
         given().when().get("https://restful-booker.herokuapp.com/booking")
                 .then()

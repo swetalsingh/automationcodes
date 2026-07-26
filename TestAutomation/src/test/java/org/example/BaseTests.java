@@ -1,8 +1,7 @@
 package org.example;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +10,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
+
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 public class BaseTests{
@@ -32,15 +34,12 @@ public class BaseTests{
         driver.manage().window().maximize();
     }
 
-    public void alertaccept(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        try{
-            wait.until(ExpectedConditions.alertIsPresent());
-            Alert alert = driver.switchTo().alert();
-            alert.accept();
-        }catch(NoAlertPresentException e){
-            System.out.println(e);
-        }
+    public void TakeScreenshotForPage(WebDriver driver) throws IOException {
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        File source = ts.getScreenshotAs(OutputType.FILE);
+        String DestinationFilePath = System.getProperty("user.dir") + "/screenshots/test_"+ System.currentTimeMillis();
+        File DestinationFile = new File(DestinationFilePath);
+        FileUtils.copyFile(source,DestinationFile);
     }
 
     @AfterMethod

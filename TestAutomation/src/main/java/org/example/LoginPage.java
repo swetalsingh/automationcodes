@@ -1,19 +1,24 @@
 package org.example;
 
+import dev.failsafe.internal.util.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- * Hello world!
- *
- */
+import java.time.Duration;
+
 public class LoginPage
 {
     WebDriver driver ;
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     LoginPageObjects _objectsForLogin = new LoginPageObjects();
+    LeavesPageObjects _lop = new LeavesPageObjects();
 
     public LoginPage(WebDriver driver){
         this.driver = driver;
     }
+
+
     public void enterUserName(){
          driver.findElement(_objectsForLogin.UserName).sendKeys("Admin");
     }
@@ -23,7 +28,15 @@ public class LoginPage
     }
 
     public void clickSignIn(){
-          driver.findElement(_objectsForLogin.Login).click();
+
+        driver.findElement(_objectsForLogin.Login).click();
+
+    }
+
+
+    public void clickOnLeave() {
+        driver.findElement(_objectsForLogin.leaveMenu).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(_lop.LeaveList));
     }
 
     public void logout(){
