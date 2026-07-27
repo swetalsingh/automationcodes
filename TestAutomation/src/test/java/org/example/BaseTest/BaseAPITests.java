@@ -1,0 +1,45 @@
+package org.example.BaseTest;
+
+import io.restassured.RestAssured;
+import org.testng.annotations.BeforeClass;
+
+import java.util.Random;
+
+public class BaseAPITests {
+
+    @BeforeClass
+    public void setup(){
+        RestAssured.baseURI = "https://petstore.swagger.io/v2";
+    }
+
+    public String generateString(int length){
+
+        String Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder rs = new StringBuilder();
+        Random random = new Random();
+        for(int i =0; i <length ; i++){
+            int index = random.nextInt(Characters.length());
+            rs.append(Characters.charAt(index));
+        }
+
+        return rs.toString();
+    }
+
+    public String generateEmail(int length){
+
+        String Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder rs = new StringBuilder();
+        Random random = new Random();
+        for(int i =0; i <length ; i++){
+            int index = random.nextInt(Characters.length());
+            rs.append(Characters.charAt(index));
+        }
+
+        return rs.toString()+"@gmail.com";
+    }
+
+    public int generateNumber(int length){
+        Random randomInt = new Random();
+        return randomInt.nextInt(length);
+    }
+}
