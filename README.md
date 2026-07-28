@@ -1,21 +1,46 @@
 # automationcodes
 
-Selenium-based Java test automation skeleton (Maven) implementing Page Object classes for a login/logout flow. Intended as a starting point for web UI automation and API tests (Rest-Assured is included in the Maven POM).
+This Repository contains selenium automation framework built using Java and Maven. It follows the Page Object Model (POM) design pattern for the UI automation and also includes API testing using Rest Assured.
 
-## Stack
-- Language(s): Java (100%)
-- Build: Maven
-- Test runner: TestNG (testng.xml provided)
-- Browser automation: Selenium (selenium-java 4.21.0)
-- API testing: Rest-Assured (6.0.1)
-- Notable libraries: selenium-java, testng, rest-assured, jackson-core
+## Framework
+- Test runner: TestNG
+- Browser automation: Selenium WebDriver
+- Design: Page Object Model (POM)
+- Build Tool: Maven
+- API Testing: Rest Assured
+- Language: Java
 
-## What this is
-A small Maven project containing Page Object classes for a login flow and the necessary dependencies to run Selenium and API tests. It serves as a skeleton for adding test classes and test suites using TestNG.
+## Getting started
+### Setup 
+1. Clone the repo:
+   - git clone https://github.com/swetalsingh/automationcodes.git
+2. Enter the project and create a feature branch:
+   - cd automationcodes
+   - git checkout -b feature/<short-description>
+3. Install dependencies / build:
+   - If Maven: mvn clean test-compile
+4. Run tests:
+   - If using TestNG suite XML: mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml
+   - Or run a specific TestNG suite/class via your IDE or build tool
+5. View screenshots/reports:
+   - TestNG HTML: target/surefire-reports or test-output (TestNG default)
+   - Screenshots can be viewed from the screenshots folder inside the repo
+6. Push changes and open PR:
+   - git add .
+   - git commit -m "feat: <short description>"
+   - git push origin feature/<short-description>
 
-## Repository layout
-Top-level entries:
-- README.md — this file
-- TestAutomation/ — Maven project with automation code
+## Project layout 
+- src/main/java/org.example/amazonFactory/SeleniumFactory - Contains properties and browser initialization methods.
+- src/main/java/org.example/Pages - Contains 2 page classes - Home page, Electronics (Sub category) Page implementing page actions and containing webelements of respective pages.
+- src/test/java/org.example/APITest - Contains methods for different curd operations (GET, PUT, POST, DELETE).  
+- src/test/java/org.example/BaseTest - Contains Reusable methods across the framework for UI and API tests in their respective classes.
+- src/test/java/org.example/UITests - Contains test methods for the UI.
+- Properties- This file contains configuration variables like browser name and URL.
+- Screenshots- This folder stores the captured screenshots.
 
-Annotated tree (important files only):
+## Chosen websites/APIs
+  - UI:  https://www.amazon.in/
+  - API: https://petstore.swagger.io/v2
+
+
