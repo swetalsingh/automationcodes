@@ -13,20 +13,20 @@ public class HomePageTest extends BaseTests {
     private final String titleOfPage = "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in";
     private final String expectedsearchresult = "\"iphone\"" ;
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void verifyUserIsonHomePage(){
         boolean onHomePage = hp.userOnHomePage();
         Assert.assertTrue(onHomePage);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void verifyPageTitle() throws IOException {
         String title =  hp.pageTitle();
         TakeScreenshotForPage(driver, getCurrentMethodName());
         Assert.assertEquals(title, titleOfPage);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void verifySearchResults() throws IOException {
         String searchResults = hp.searchItem();
         TakeScreenshotForPage(driver, getCurrentMethodName());

@@ -9,13 +9,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class APITests extends BaseAPITests {
 
-    private int idOfUser = generateNumber(9);
+    private int idOfUser = generateId();
     private String userName = generateString(7);
     private String Password = generateString(15);
     private String firstName = generateString(5);
     private String lastName = generateString(5);
     private String emailaddress = generateEmail(7);
-    private String phoneNumber = String.valueOf(generateNumber(10));
+    private String phoneNumber = generateNumber(10);
 
 
     @Test(enabled = true, priority = 1)
@@ -63,7 +63,7 @@ public class APITests extends BaseAPITests {
     public void updateUser() {
 
         emailaddress = generateEmail(10);
-        phoneNumber = String.valueOf(generateNumber(8));
+        phoneNumber = generateNumber(8);
 
         String requestAPIBody =
                          "{"
@@ -102,6 +102,17 @@ public class APITests extends BaseAPITests {
                 .then()
                 .statusCode(200)
                 .body("message",equalTo(userName))
+                .log().all();
+    }
+
+    @Test(enabled = true, priority = 5)
+    public void getDeletedUser() {
+        given().
+                when()
+                .get(baseURI + "/user/" + userName)
+                .then()
+                .statusCode(404)
+                .body("message",equalTo("User not found"))
                 .log().all();
     }
 

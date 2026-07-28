@@ -38,8 +38,21 @@ public class BaseAPITests {
         return rs.toString()+"@gmail.com";
     }
 
-    public int generateNumber(int length){
+    public String generateNumber(int length){
+
+        String Characters = "0123456789";
+        StringBuilder rs = new StringBuilder();
+        Random random = new Random();
+        for(int i =0; i <length ; i++){
+            int index = random.nextInt(Characters.length());
+            rs.append(Characters.charAt(index));
+        }
+
+        return rs.toString();
+    }
+
+    public int generateId(){
         Random randomInt = new Random();
-        return randomInt.nextInt(length);
+        return randomInt.nextInt(90)+10;
     }
 }

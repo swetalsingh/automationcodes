@@ -11,7 +11,7 @@ import java.io.IOException;
 public class ElectronicsPageTest extends BaseTests {
 
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void verifyNavigationToElectronicsPage() throws IOException {
         hp.clickOnElectronicsLink();
         TakeScreenshotForPage(driver, getCurrentMethodName());
