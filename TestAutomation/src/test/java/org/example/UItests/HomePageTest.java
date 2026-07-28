@@ -2,13 +2,22 @@ package org.example.UItests;
 
 
 import org.example.BaseTest.BaseTests;
+import org.example.Pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
 public class HomePageTest extends BaseTests {
+
+    private HomePage hp;
+
+    @BeforeClass
+    public void init_pages(){
+        hp = new HomePage(driver);
+    }
 
     private final String titleOfPage = "Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in";
     private final String expectedsearchresult = "\"iphone\"" ;
@@ -26,7 +35,7 @@ public class HomePageTest extends BaseTests {
         Assert.assertEquals(title, titleOfPage);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true )
     public void verifySearchResults() throws IOException {
         String searchResults = hp.searchItem();
         TakeScreenshotForPage(driver, getCurrentMethodName());

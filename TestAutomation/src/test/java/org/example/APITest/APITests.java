@@ -1,7 +1,10 @@
 package org.example.APITest;
 
+import org.example.BaseTest.APIData;
 import org.example.BaseTest.BaseAPITests;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.containsString;
@@ -9,30 +12,13 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class APITests extends BaseAPITests {
 
-    private int idOfUser = generateId();
-    private String userName = generateString(7);
-    private String Password = generateString(15);
-    private String firstName = generateString(5);
-    private String lastName = generateString(5);
-    private String emailaddress = generateEmail(7);
-    private String phoneNumber = generateNumber(10);
+    APIData data = new APIData();
 
+    HashMap<String,Object> requestAPIBody = data.UserData();
 
     @Test(enabled = true, priority = 1)
     public void createUser(){
-        String requestAPIBody =
-        "{"
-        + "\"id\" : " +idOfUser + ","
-        + "\"username\" :\"" + userName  + "\","
-        + "\"firstName\" : \"" + firstName+ "\","
-        + "\"lastName\" : \"" +  lastName+ "\","
-        + "\"email\" :\"" + emailaddress+ "\","
-        + "\"password\" : \"" + Password+ "\","
-        + "\"phone\" :\"" + phoneNumber+ "\","
-        + "\"userStatus\" :" + 0
-        +"}" ;
 
-        System.out.println(requestAPIBody);
         given()
                 .contentType("application/json")
                 .body(requestAPIBody)
@@ -41,55 +27,37 @@ public class APITests extends BaseAPITests {
                 .then()
                 .statusCode(200)
                 .body("code",equalTo(200))
-                .body("message", equalTo(String.valueOf(idOfUser)))
+                .body("message", equalTo(String.valueOf(requestAPIBody.get("id"))))
                 .log().all();
 
     }
 
-    @Test(enabled = true, priority = 2)
+     @Test(enabled = true, priority = 2)
     public void getUser() {
         given().
                 when()
-                .get(baseURI + "/user/" + userName)
+                .get(baseURI + "/user/" + requestAPIBody.get("username"))
                 .then()
                 .statusCode(200)
-                .body("id",equalTo(idOfUser))
-                .body("firstName", equalTo(firstName))
-                .body("phone", equalTo(phoneNumber))
+                .body("id",equalTo(requestAPIBody.get("id")))
+                .body("firstName", equalTo(requestAPIBody.get("firstName")))
+                .body("phone", equalTo(requestAPIBody.get("phone")))
                 .log().all();
     }
 
     @Test(enabled = true, priority = 3)
     public void updateUser() {
 
-        emailaddress = generateEmail(10);
-        phoneNumber = generateNumber(8);
-
-        String requestAPIBody =
-                         "{"
-                        + "\"id\" : " +idOfUser + ","
-                        + "\"username\" :\"" + userName  + "\","
-                        + "\"firstName\" : \"" + firstName+ "\","
-                        + "\"lastName\" : \"" +  lastName+ "\","
-                        + "\"email\" :\"" + emailaddress+ "\","
-                        + "\"password\" : \"" + Password+ "\","
-                        + "\"phone\" :\"" + phoneNumber+ "\","
-                        + "\"userStatus\" :" + 0
-                        +"}" ;
-
-        System.out.println(requestAPIBody);
-
         given()
                 .contentType("application/json")
                 .body(requestAPIBody)
                 .when()
-                .put(baseURI + "/user/" + userName)
+                .put(baseURI + "/user/" + requestAPIBody.get("username"))
                 .then()
                 .statusCode(200)
-                .body("message",equalTo(String.valueOf(idOfUser)))
+                .body("message",equalTo(String.valueOf(requestAPIBody.get("id"))))
                 .log().all();
 
-        System.out.println(requestAPIBody);
         getUser();
     }
 
@@ -98,10 +66,10 @@ public class APITests extends BaseAPITests {
 
         given()
                 .when()
-                .delete(baseURI + "/user/" + userName)
+                .delete(baseURI + "/user/" + requestAPIBody.get("username"))
                 .then()
                 .statusCode(200)
-                .body("message",equalTo(userName))
+                .body("message",equalTo(requestAPIBody.get("username")))
                 .log().all();
     }
 
@@ -109,7 +77,7 @@ public class APITests extends BaseAPITests {
     public void getDeletedUser() {
         given().
                 when()
-                .get(baseURI + "/user/" + userName)
+                .get(baseURI + "/user/" + requestAPIBody.get("username"))
                 .then()
                 .statusCode(404)
                 .body("message",equalTo("User not found"))

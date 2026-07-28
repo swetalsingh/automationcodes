@@ -2,17 +2,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
 <suite name="MyTestSuite" verbose="1" parallel="false" thread-count="3">
-    <test name="Home">
+    <test name="UITest">
         <classes>
             <class name="org.example.UItests.HomePageTest" />
-        </classes>
-    </test>
-
-    <test name="Electronics">
-        <classes>
             <class name="org.example.UItests.ElectronicsPageTest" />
         </classes>
     </test>
+
 
     <test name="API Tests">
         <classes>

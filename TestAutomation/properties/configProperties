@@ -1,2 +1,3 @@
 browserName = Chrome
 URL = https://www.amazon.in/
+APIURI = https://petstore.swagger.io/v2

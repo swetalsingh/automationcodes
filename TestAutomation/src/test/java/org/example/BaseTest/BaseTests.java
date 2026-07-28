@@ -18,20 +18,16 @@ public class BaseTests {
     SeleniumFactory sf;
     Properties prop;
     protected WebDriver driver ;
-    protected HomePage hp;
-    protected ElectronicsPage ep;
 
-    @BeforeTest
+    @BeforeClass
     public void setUp(){
         sf = new SeleniumFactory();
         prop = sf.initialise_Properties();
         driver = sf.initBrowser(prop);
-        hp = new HomePage(driver);
-        ep = new ElectronicsPage(driver);
     }
 
 
-    @AfterTest
+    @AfterClass
     public void tearDown(){
         driver.quit();
     }

@@ -3,13 +3,28 @@ package org.example.BaseTest;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Random;
 
 public class BaseAPITests {
 
+    Properties prop;
     @BeforeClass
     public void setup(){
-        RestAssured.baseURI = "https://petstore.swagger.io/v2";
+
+        try {
+            FileInputStream fs = new FileInputStream("./properties/configProperties");
+            prop = new Properties();
+            prop.load(fs);
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+        RestAssured.baseURI = prop.getProperty("APIURI");
     }
 
     public String generateString(int length){
