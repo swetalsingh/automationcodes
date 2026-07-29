@@ -13,8 +13,8 @@ public class APIData extends BaseAPITests {
     private String password = generateString(15);
     private String firstName = generateString(5);
     private String lastName = generateString(5);
-    private String email = generateString(8);
-    private String phone = generateString(10);
+    private String email = generateEmail(9);
+    private String phone = generateNumber(10);
     private int userStatus = r.nextInt(2);
     private int idOfuser =  generateId();
 
@@ -38,7 +38,7 @@ public class APIData extends BaseAPITests {
 
     public HashMap updatedUserData(){
 
-        email = generateString(10);
+        email = generateEmail(10);
         phone = generateString(8);
 
         HashMap<String,Object> hm = new HashMap<>();

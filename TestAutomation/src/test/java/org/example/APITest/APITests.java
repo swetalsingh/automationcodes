@@ -41,16 +41,18 @@ public class APITests extends BaseAPITests {
                 .statusCode(200)
                 .body("id",equalTo(requestAPIBody.get("id")))
                 .body("firstName", equalTo(requestAPIBody.get("firstName")))
-                .body("phone", equalTo(requestAPIBody.get("phone")))
+                .body("userStatus", equalTo(requestAPIBody.get("userStatus")))
                 .log().all();
     }
 
     @Test(enabled = true, priority = 3)
     public void updateUser() {
 
+        HashMap updatedRequestBody = data.updatedUserData();
+
         given()
                 .contentType("application/json")
-                .body(requestAPIBody)
+                .body(updatedRequestBody)
                 .when()
                 .put(baseURI + "/user/" + requestAPIBody.get("username"))
                 .then()

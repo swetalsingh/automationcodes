@@ -49,8 +49,8 @@ public class BaseAPITests {
             int index = random.nextInt(Characters.length());
             rs.append(Characters.charAt(index));
         }
-
-        return rs.toString()+"@gmail.com";
+        rs.append("@gmail.com");
+        return rs.toString();
     }
 
     public String generateNumber(int length){
@@ -63,7 +63,7 @@ public class BaseAPITests {
             rs.append(Characters.charAt(index));
         }
 
-        return rs.toString();
+        return String.valueOf(rs);
     }
 
     public int generateId(){
