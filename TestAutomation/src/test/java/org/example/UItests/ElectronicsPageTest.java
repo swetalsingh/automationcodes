@@ -24,8 +24,8 @@ public class ElectronicsPageTest extends BaseTests {
     @Test(enabled = true)
     public void verifyNavigationToElectronicsPage() throws IOException {
         hp.clickOnElectronicsLink();
-        TakeScreenshotForPage(driver, getCurrentMethodName());
         boolean onElectronicsPage = ep.userOnElectronicsPage();
         Assert.assertTrue(onElectronicsPage);
+        TakeScreenshotForPage(driver, getCurrentMethodName());
     }
 }

@@ -8,15 +8,14 @@ import org.openqa.selenium.WebElement;
 public class ElectronicsPage {
     WebDriver driver;
 
-    private By txt = By.xpath("//span[@class='a-list-item']//child::h2");
+    private By electronicsImg = By.xpath("//img[@alt='Electronics']");
 
     public ElectronicsPage(WebDriver driver){
         this.driver = driver;
     }
 
     public boolean userOnElectronicsPage(){
-        WebElement ElectronicsPageElement = driver.findElement(txt);
-        System.out.println(ElectronicsPageElement.getText());
+        WebElement ElectronicsPageElement = driver.findElement(electronicsImg);
         return ElectronicsPageElement.isDisplayed();
     }
 }

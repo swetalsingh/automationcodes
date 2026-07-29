@@ -1,27 +1,29 @@
 package org.example.BaseTest;
 
 import org.apache.commons.io.FileUtils;
-import org.example.Pages.ElectronicsPage;
-import org.example.Pages.HomePage;
-import org.example.amazon.factoey.SeleniumFactory;
+import org.example.setUp.testSetUp;
 import org.openqa.selenium.*;
 import org.testng.Reporter;
 import org.testng.annotations.*;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
 public class BaseTests {
 
-    SeleniumFactory sf;
+    testSetUp sf;
     Properties prop;
     protected WebDriver driver ;
 
     @BeforeClass
     public void setUp(){
-        sf = new SeleniumFactory();
+        sf = new testSetUp();
         prop = sf.initialise_Properties();
         driver = sf.initBrowser(prop);
     }
@@ -38,11 +40,10 @@ public class BaseTests {
 
 
     public void TakeScreenshotForPage(WebDriver driver, String screenshotName) throws IOException {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
+        Screenshot screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(1000)).takeScreenshot(driver);
         String DestinationFilePath = System.getProperty("user.dir") + "/screenshots/" + screenshotName + "-" + System.currentTimeMillis()+ ".png";
         File DestinationFile = new File(DestinationFilePath);
-        FileUtils.copyFile(source,DestinationFile);
+        ImageIO.write(screenshot.getImage(),"PNG",DestinationFile);
     }
 
 }

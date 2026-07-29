@@ -31,15 +31,15 @@ public class HomePageTest extends BaseTests {
     @Test(enabled = true)
     public void verifyPageTitle() throws IOException {
         String title =  hp.pageTitle();
-        TakeScreenshotForPage(driver, getCurrentMethodName());
         Assert.assertEquals(title, titleOfPage);
+        TakeScreenshotForPage(driver, getCurrentMethodName());
     }
 
     @Test(enabled = true )
     public void verifySearchResults() throws IOException {
         String searchResults = hp.searchItem();
-        TakeScreenshotForPage(driver, getCurrentMethodName());
         Assert.assertEquals(searchResults,expectedsearchresult);
+        TakeScreenshotForPage(driver, getCurrentMethodName());
     }
 
 
